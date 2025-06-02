@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cnxcpnydtse7k"]
 
 [ext_resource type="Texture2D" uid="uid://dp54dcgrb5wv6" path="res://assets/textures/entities/planes/planeYellow1.png" id="1_3crff"]
-[ext_resource type="Script" path="res://src/entities/plane.gd" id="1_wle06"]
+[ext_resource type="Script" uid="uid://bopmnug6qsix8" path="res://src/entities/plane.gd" id="1_wle06"]
 [ext_resource type="Texture2D" uid="uid://d0bcqgl73e1vy" path="res://assets/textures/entities/planes/planeYellow2.png" id="2_p47as"]
 [ext_resource type="Texture2D" uid="uid://dduq6trey1eiu" path="res://assets/textures/entities/planes/planeYellow3.png" id="3_d8n2r"]
 [ext_resource type="AudioStream" uid="uid://b0fe7ukpremmf" path="res://assets/audio/sound/coin1.ogg" id="5_17trs"]
@@ -26,7 +26,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_nr8mi"]
 radius = 45.0111
 
-[node name="plane" type="CharacterBody2D"]
+[node name="Plane" type="CharacterBody2D"]
 scale = Vector2(0.5, 0.5)
 collision_mask = 2
 script = ExtResource("1_wle06")
@@ -34,6 +34,7 @@ max_tilt_angle = 90
 flap_power = 300
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 rotation = -0.785398
 sprite_frames = SubResource("SpriteFrames_ks0mr")
 autoplay = "default"
@@ -42,6 +43,6 @@ frame_progress = 0.409781
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_nr8mi")
 
-[node name="audio_flap" type="AudioStreamPlayer" parent="."]
+[node name="AudioFlap" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_17trs")
 bus = &"SFX"

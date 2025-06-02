@@ -1,4 +1,4 @@
-extends UIForm
+extends Control
 class_name GameForm
 
 ## 这个HBoxContainer可以让我们的子节点（TextureRect节点水平分布）
