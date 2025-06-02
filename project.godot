@@ -20,11 +20,6 @@ config/icon="res://icon.png"
 
 buses/default_bus_layout="res://assets/default_bus_layout.tres"
 
-[autoload]
-
-RankBoard="*res://src/auto/RankBoard.gd"
-AudioManager="*res://src/auto/AudioManager.gd"
-
 [display]
 
 window/size/viewport_width=576
