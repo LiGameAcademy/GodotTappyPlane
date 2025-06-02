@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bj6vqwa0jekhb"]
 
-[ext_resource type="Script" path="res://src/widgets/game_form.gd" id="1_1tfdo"]
+[ext_resource type="Script" uid="uid://c2sdoo65nj58g" path="res://src/widgets/game_form.gd" id="1_1tfdo"]
 [ext_resource type="Texture2D" uid="uid://hurvio67va1p" path="res://assets/textures/widgets/numbers/number0.png" id="2_mi8xi"]
 
 [node name="GameForm" type="Control"]

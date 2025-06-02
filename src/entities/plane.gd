@@ -3,7 +3,7 @@ extends CharacterBody2D
 ## 这是主角控制的飞机的逻辑实现，需要一个向下的重力，以及监听玩家flap动作的输入，施加一个向上的力。
 
 ## flap时播放的音效节点
-@onready var audio_flap: AudioStreamPlayer = $audio_flap
+@onready var audio_flap: AudioStreamPlayer = $AudioFlap
 
 ## 重力配置
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
