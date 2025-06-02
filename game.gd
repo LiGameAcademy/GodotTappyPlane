@@ -30,19 +30,6 @@ func _ready() -> void:
 	# 初始化游戏
 	init_game()
 	
-	# 确保信号连接
-	if not popup_game_over.is_connected("quit_pressed", _on_popup_game_over_quit_pressed):
-		popup_game_over.quit_pressed.connect(_on_popup_game_over_quit_pressed)
-		
-	if not popup_game_over.is_connected("retry_pressed", _on_popup_game_over_retry_pressed):
-		popup_game_over.retry_pressed.connect(_on_popup_game_over_retry_pressed)
-		
-	if not menu_form.is_connected("btn_new_game_pressed", _on_menu_form_btn_new_game_pressed):
-		menu_form.btn_new_game_pressed.connect(_on_menu_form_btn_new_game_pressed)
-		
-	if not menu_form.is_connected("btn_quit_pressed", _on_menu_form_btn_quit_pressed):
-		menu_form.btn_quit_pressed.connect(_on_menu_form_btn_quit_pressed)
-
 func _process(_delta: float) -> void:
 	match current_state:
 		GameState.MENU:
