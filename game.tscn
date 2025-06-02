@@ -12,6 +12,22 @@
 script = ExtResource("1_7jktm")
 max_spawn_rock_time = 2.0
 
+[node name="UICanvasLayer" type="CanvasLayer" parent="."]
+layer = 64
+
+[node name="PopupGameOver" parent="UICanvasLayer" instance=ExtResource("8_hve3p")]
+unique_name_in_owner = true
+offset_left = -168.0
+offset_top = -69.5
+offset_right = 168.0
+offset_bottom = 69.5
+
+[node name="GameForm" parent="UICanvasLayer" instance=ExtResource("6_j5wjh")]
+unique_name_in_owner = true
+
+[node name="MenuForm" parent="UICanvasLayer" instance=ExtResource("7_vef74")]
+unique_name_in_owner = true
+
 [node name="Parallax2D" type="Parallax2D" parent="."]
 repeat_size = Vector2(576, 0)
 autoscroll = Vector2(-50, 0)
@@ -32,22 +48,6 @@ bus = &"BGM"
 [node name="AudioGameOver" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_vef74")
 bus = &"SFX"
-
-[node name="UICanvasLayer" type="CanvasLayer" parent="."]
-layer = 64
-
-[node name="PopupGameOver" parent="UICanvasLayer" instance=ExtResource("8_hve3p")]
-unique_name_in_owner = true
-offset_left = -168.0
-offset_top = -69.5
-offset_right = 168.0
-offset_bottom = 69.5
-
-[node name="GameForm" parent="UICanvasLayer" instance=ExtResource("6_j5wjh")]
-unique_name_in_owner = true
-
-[node name="MenuForm" parent="UICanvasLayer" instance=ExtResource("7_vef74")]
-unique_name_in_owner = true
 
 [connection signal="quit_pressed" from="UICanvasLayer/PopupGameOver" to="." method="_on_popup_game_over_quit_pressed"]
 [connection signal="retry_pressed" from="UICanvasLayer/PopupGameOver" to="." method="_on_popup_game_over_retry_pressed"]
