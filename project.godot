@@ -10,24 +10,19 @@ config_version=5
 
 [application]
 
-config/name="TappyPlane-03-complete"
+config/name="TappyPlane"
 config/tags=PackedStringArray("godot10+")
 run/main_scene="res://game.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.png"
 
+[audio]
+
+buses/default_bus_layout="res://assets/default_bus_layout.tres"
 
 [autoload]
 
 LocaleService="*res://src/i18n/locale_service.gd"
-
-[internationalization]
-
-locale/fallback="en"
-
-[audio]
-
-buses/default_bus_layout="res://assets/default_bus_layout.tres"
 
 [display]
 

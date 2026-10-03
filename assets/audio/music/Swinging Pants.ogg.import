@@ -2,7 +2,7 @@
 
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
-uid="uid://b1n3v8x16io0p"
+uid="uid://28ce040or7p2"
 path="res://.godot/imported/Swinging Pants.ogg-a6a3abd088f575e39d8cee7486b452d5.oggvorbisstr"
 
 [deps]
@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/Swinging Pants.ogg-a6a3abd088f575e39d8cee7486
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
 bpm=0
 beat_count=0
