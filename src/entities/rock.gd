@@ -1,27 +1,14 @@
+class_name Rock
 extends Area2D
 
-## 岩石障碍物的实现，从右向左移动，与飞机碰撞时发出信号
-
-# 移动速度
-@export var speed = 200.0
-
-# 碰撞信号
 signal rock_entered
+@export var config: GameConfig
 
-func _ready() -> void:
-	# 将岩石添加到"rock"组，便于统一管理
-	add_to_group("rock")
-
-func _process(delta: float) -> void:
-	# 向左移动
-	position.x -= speed * delta
-	
-	# 当岩石移出屏幕时销毁
-	if position.x <= -56:
+func _physics_process(delta: float) -> void:
+	position.x -= config.rock_speed * delta
+	if position.x <= config.despawn_x:
 		queue_free()
 
 func _on_body_entered(body: Node2D) -> void:
-	# 检查碰撞的是否为飞机
-	if body is CharacterBody2D:
-		# 发出碰撞信号
+	if body is TappyPlane:
 		rock_entered.emit()

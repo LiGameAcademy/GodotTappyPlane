@@ -1,183 +1,104 @@
 extends Node2D
 
-# 游戏状态枚举
-enum GameState {
-	MENU,    # 菜单状态
-	PLAYING, # 游戏中状态
-	GAME_OVER # 游戏结束状态
-}
+const PLANE_SCENE: PackedScene = preload("res://src/entities/plane.tscn")
+const ROCK_SCENE: PackedScene = preload("res://src/entities/rock.tscn")
+@export var config: GameConfig
+@onready var world: Node2D = $World
+@onready var actors: Node2D = $World/Actors
+@onready var spawn_timer: Timer = $SpawnTimer
+var plane: TappyPlane
 
-# 当前游戏状态
-var current_state = GameState.MENU
 
-# 游戏相关变量
-@onready var plane: CharacterBody2D = null
+@onready var score_timer: Timer = $ScoreTimer
+@onready var menu_form: MenuForm = $UICanvasLayer/MenuForm
+@onready var game_form: GameForm = $UICanvasLayer/GameForm
+@onready var popup_game_over: PopupGameOver = $UICanvasLayer/PopupGameOver
 @onready var audio_game_over: AudioStreamPlayer = $AudioGameOver
-@onready var menu_form : MenuForm = %MenuForm
-@onready var game_form : GameForm = %GameForm
-@onready var popup_game_over : PopupGameOver = %PopupGameOver
+var rules: GameRules = GameRules.new()
 
-var s_plane : PackedScene = preload("res://src/entities/plane.tscn")
-var timer : Timer = Timer.new()
-@export var min_spawn_rock_time : float = 1.0
-@export var max_spawn_rock_time : float = 3.0
-
-var s_rock : PackedScene = preload("res://src/entities/rock.tscn")
-var current_score : int = 0
-var score_timer : Timer = Timer.new()
-
+#region Lifecycle
 func _ready() -> void:
-	# 初始化游戏
-	init_game()
-	
+	spawn_timer.timeout.connect(_on_spawn_timeout)
+	score_timer.timeout.connect(_on_score_timeout)
+	menu_form.btn_new_game_pressed.connect(new_game)
+	menu_form.btn_quit_pressed.connect(quit_game)
+	popup_game_over.retry_pressed.connect(new_game)
+	popup_game_over.quit_pressed.connect(quit_game)
+	menu_form.show()
+	game_form.hide()
+	popup_game_over.hide()
+
 func _process(_delta: float) -> void:
-	match current_state:
-		GameState.MENU:
-			# 菜单状态不需要特殊处理
-			pass
-			
-		GameState.PLAYING:
-			# 检查飞机是否超出屏幕边界
-			if plane and (plane.position.y <= 0 or plane.position.y >= get_viewport_rect().size.y):
-				game_over()
-				return
-			
-			# 岩石生成计时器
-			if timer.time_left <= 0 and timer.is_stopped():
-				spawn_rock()
-				timer.wait_time = randf_range(min_spawn_rock_time, max_spawn_rock_time)
-				timer.start()
-			
-		GameState.GAME_OVER:
-			# 游戏结束状态不需要特殊处理
-			pass
+	if rules.state == GameRules.State.PLAYING and is_instance_valid(plane):
+		if plane.position.y <= 0.0 or plane.position.y >= get_viewport_rect().size.y:
+			_on_hit()
+#endregion
 
-## 初始化游戏
-func init_game() -> void:
-	# 显示菜单界面
-	menu_form.visible = true
-	game_form.visible = false
-	popup_game_over.visible = false
-	current_state = GameState.MENU
-
-## 开始新游戏
+#region Public
 func new_game() -> void:
-	# 切换到游戏状态
-	current_state = GameState.PLAYING
-	
-	# 显示游戏界面
-	menu_form.visible = false
-	game_form.visible = true
-	popup_game_over.visible = false
-	
-	# 创建飞机
-	if not plane:
-		plane = s_plane.instantiate()
-		plane.position = Vector2(72, 152)
-		self.add_child(plane)
-	
-	# 初始化计时器
-	if not timer.is_connected("timeout", _on_timer_timeout):
-		timer.timeout.connect(_on_timer_timeout)
-	timer.wait_time = randf_range(min_spawn_rock_time, max_spawn_rock_time)
-	if not timer.is_inside_tree():
-		self.add_child(timer)
-	timer.one_shot = true
-	timer.start()
-	
-	# 初始化分数
-	current_score = 0
-	game_form.update_score_display(current_score)
-	
-	# 初始化分数计时器
-	if not score_timer.is_connected("timeout", _on_score_timer_timeout):
-		score_timer.timeout.connect(_on_score_timer_timeout)
-	score_timer.wait_time = 1
-	if not score_timer.is_inside_tree():
-		self.add_child(score_timer)
+	_clear_actors()
+	rules.start()
+	world.process_mode = Node.PROCESS_MODE_INHERIT
+	menu_form.hide()
+	popup_game_over.hide()
+	game_form.show()
+	game_form.update_score_display(rules.score)
+	_spawn_plane()
+	_schedule_rock()
 	score_timer.start()
-	
-	get_tree().paused = false
 
-## 退出游戏
 func quit_game() -> void:
 	get_tree().quit()
+#endregion
 
-## 生成岩石障碍物
-func spawn_rock() -> void:
-	var random_choice = randi_range(0, 1)
-	var rock: Node2D = s_rock.instantiate()
-	
-	# 将rock和plane的撞击信号，绑定在对应的方法上
-	rock.rock_entered.connect(_on_rock_entered)
-	
-	# 随机决定岩石的位置（上方或下方）
-	if random_choice == 0:
-		# 下方岩石
-		rock.position = Vector2(632, randf_range(216, 336))
-	else:
-		# 上方岩石（翻转）
-		rock.rotation_degrees = 180
-		rock.position = Vector2(632, randf_range(-24, 112))
-	
-	# 添加到场景
-	self.add_child(rock)
-
-## 游戏结束
-func game_over() -> void:
-	# 切换到游戏结束状态
-	current_state = GameState.GAME_OVER
-	
-	# 暂停游戏
-	get_tree().paused = true
-	
-	# 播放游戏结束音效
+#region Signals and spawn
+func _on_hit() -> void:
+	if not rules.finish():
+		return
+	spawn_timer.stop()
+	score_timer.stop()
+	world.set_deferred("process_mode", Node.PROCESS_MODE_DISABLED)
 	audio_game_over.play()
-	
-	# 销毁小飞机
-	if plane:
-		plane.queue_free()
-		plane = null
-	
-	# 销毁所有的障碍物
-	for rock in get_tree().get_nodes_in_group("rock"):
-		rock.queue_free()
-	
-	# 显示游戏结束界面
-	game_form.visible = false
-	popup_game_over.visible = true
-	popup_game_over.update_score(current_score)
+	game_form.hide()
+	popup_game_over.update_score(rules.score)
+	popup_game_over.show()
+	_clear_actors.call_deferred()
 
-## 计时器回调函数
-func _on_timer_timeout() -> void:
-	# 生成岩石并重置计时器
-	spawn_rock()
-	timer.wait_time = randf_range(min_spawn_rock_time, max_spawn_rock_time)
-	timer.start()
+func _on_spawn_timeout() -> void:
+	if rules.state == GameRules.State.PLAYING:
+		_spawn_rock()
+		_schedule_rock()
 
-func _on_score_timer_timeout() -> void:
-	# 更新分数
-	current_score += 1
-	game_form.update_score_display(current_score)
+func _on_score_timeout() -> void:
+	rules.tick()
+	game_form.update_score_display(rules.score)
 
-## 信号回调函数
-func _on_rock_entered() -> void:
-	# 岩石撞击信号
-	game_over()
+func _spawn_plane() -> void:
+	plane = PLANE_SCENE.instantiate() as TappyPlane
+	plane.config = config
+	plane.position = config.plane_start
+	actors.add_child(plane)
 
-## 按钮事件处理
-func _on_menu_form_btn_new_game_pressed() -> void:
-	# 开始游戏按钮
-	new_game()
+func _spawn_rock() -> void:
+	var rock: Rock = ROCK_SCENE.instantiate() as Rock
+	rock.config = config
+	rock.rock_entered.connect(_on_hit)
+	if randi_range(0, 1) == 0:
+		rock.position = Vector2(config.spawn_x,
+			randf_range(config.bottom_y.x, config.bottom_y.y))
+	else:
+		rock.rotation_degrees = 180.0
+		rock.position = Vector2(config.spawn_x,
+			randf_range(config.top_y.x, config.top_y.y))
+	actors.add_child(rock)
 
-func _on_menu_form_btn_quit_pressed() -> void:
-	# 退出游戏按钮
-	quit_game()
+func _schedule_rock() -> void:
+	spawn_timer.start(randf_range(config.spawn_interval.x, config.spawn_interval.y))
 
-func _on_popup_game_over_retry_pressed() -> void:
-	# 游戏结束界面的重试按钮
-	new_game()
+func _clear_actors() -> void:
+	for actor: Node in actors.get_children():
+		actors.remove_child(actor)
+		actor.queue_free()
+	plane = null
 
-func _on_popup_game_over_quit_pressed() -> void:
-	# 游戏结束界面的退出按钮
-	quit_game()
+#endregion

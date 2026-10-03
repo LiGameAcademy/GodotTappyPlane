@@ -1,4 +1,4 @@
-<!-- Language switch / 语言切换 -->
+<!-- Language switch -->
 <p align="right">
   🌐 <strong>Language:</strong>
   <b>English</b>
@@ -19,7 +19,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/LiGameAcademy/GodotTappyPlane)](https://github.com/LiGameAcademy/GodotTappyPlane/issues)
 [![GitHub last commit](https://img.shields.io/github/last-commit/LiGameAcademy/GodotTappyPlane)](https://github.com/LiGameAcademy/GodotTappyPlane/commits/main)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/LiGameAcademy/GodotTappyPlane/pulls)
-[![中文文档](https://img.shields.io/badge/docs-%E4%B8%AD%E6%96%87-red.svg)](./README.zh-CN.md)
+[![Chinese docs](https://img.shields.io/badge/docs-Chinese-red.svg)](./README.zh-CN.md)
 
 > 🎓 **Project status:** currently in the **Debug** stage. Bug reports and PRs are very welcome.
 
@@ -28,12 +28,13 @@
 ## About
 
 **TappyPlane** is the first demo project of the Li Game Academy Godot tutorial series.
-It's a tiny, complete, shippable game — perfect if you're new to Godot or to game
-development in general.
+It demonstrates the core gameplay loop of a small arcade game. The upgraded
+release and its Windows/Web builds are still planned; export presets alone do
+not confirm a tested release build.
 
-- 🎮 Play it on the web: [itch.io](https://liweimin0512.itch.io/tappyplane)
+- 🎮 Existing web demo: [TappyPlane on itch.io](https://godot-li.itch.io/tappyplane) (the published demo is not yet verified against this source revision)
 - 📺 Video walkthrough: [Bilibili (Chinese)](https://space.bilibili.com/8618918)
-- 📚 Full tutorial (Chinese): in the parent `tutorial/` directory of this repo
+- 📚 Full tutorial (English): parent `tutorial/` (`01-create-project-and-import-assets.md`, `02-make-the-plane-fly.md`, `03-finish-the-game.md`)
 - 📄 Chinese README: [README.zh-CN.md](./README.zh-CN.md)
 
 ## What you'll build
@@ -44,6 +45,7 @@ A side-scrolling "tap-to-flap" game featuring:
 - 🌄 Parallax-scrolling rocks with random placement
 - 💥 Real physics-based collision
 - 🏆 Score, game-over and restart loop
+- 🌐 UI language: English by default, switch to 中文 on the title screen
 - 📦 Export-ready Windows build
 
 ## Getting started
@@ -65,6 +67,8 @@ cd GodotTappyPlane
 
 > The first open will take a moment while assets are processed.
 
+The title screen defaults to **English**. Use **EN / 中文** to switch; the choice is stored in `user://locale.cfg`.
+
 ## Tech stack
 
 | Layer        | Choice                     |
@@ -81,8 +85,9 @@ cd GodotTappyPlane
 ```
 GodotTappyPlane/
 ├── assets/          # Sprites, fonts, sounds, bus layout
-├── docs/            # Author / Patreon reference images (zh-CN)
-├── src/             # Player, rocks, UI scripts
+├── docs/            # Author / Patreon reference images
+├── src/             # Player, rocks, UI, i18n
+│   └── i18n/        # LocaleService: English default, Chinese optional
 ├── game.tscn        # Main scene
 ├── game.gd          # Main scene script
 ├── project.godot    # Project configuration
@@ -94,15 +99,14 @@ GodotTappyPlane/
 
 ## Tutorials
 
-This project ships with three Chinese-language tutorials that walk you from zero
-to a complete, exportable game. They live in the parent project
-(`projects/godot-tappy-plane/tutorial/`):
+Three English written lessons walk you from zero to a complete, exportable game.
+They live in the parent project (`projects/godot-tappy-plane/tutorial/`):
 
-1. 📘 **[Part 1 — Project setup & asset import](https://github.com/LiGameAcademy/laoli_gamedev_godot4_course/tree/main/projects/godot-tappy-plane/tutorial/01-%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%B9%B6%E5%AF%BC%E5%85%A5%E7%B4%A0%E6%9D%90.md)**
-2. 📗 **[Part 2 — Making the plane fly](https://github.com/LiGameAcademy/laoli_gamedev_godot4_course/tree/main/projects/godot-tappy-plane/tutorial/02-%E8%AE%A9%E9%A3%9E%E6%9C%BA%E9%A3%9E%E8%B5%B7%E6%9D%A5.md)**
-3. 📕 **[Part 3 — Finishing the game](https://github.com/LiGameAcademy/laoli_gamedev_godot4_course/tree/main/projects/godot-tappy-plane/tutorial/03-%E5%AE%8C%E6%88%90%E4%B8%80%E6%AC%BE%E5%B0%8F%E6%B8%B8%E6%88%8F.md)**
+1. 📘 **[Part 1 — Project setup & asset import](https://github.com/LiGameAcademy/laoli_gamedev_godot4_course/blob/main/projects/godot-tappy-plane/tutorial/01-create-project-and-import-assets.md)**
+2. 📗 **[Part 2 — Making the plane fly](https://github.com/LiGameAcademy/laoli_gamedev_godot4_course/blob/main/projects/godot-tappy-plane/tutorial/02-make-the-plane-fly.md)**
+3. 📕 **[Part 3 — Finishing the game](https://github.com/LiGameAcademy/laoli_gamedev_godot4_course/blob/main/projects/godot-tappy-plane/tutorial/03-finish-the-game.md)**
 
-> English translations of the tutorials are on the way. PRs welcome!
+> Older Chinese filenames in that folder are stubs that point at these English files.
 
 ## Export notes
 
@@ -115,10 +119,10 @@ After export, prefer running `tappy_plane.console.exe` once to catch script erro
 
 ## Roadmap
 
-- [x] Three-article tutorial (Chinese)
+- [x] Three-article tutorial (English)
 - [x] Windows export preset
 - [x] Case-safe resource filenames (`rock.tscn` / `rock.gd`)
-- [ ] English tutorial translation
+- [x] English tutorial files in `projects/godot-tappy-plane/tutorial/`
 - [ ] Web build preset
 - [ ] Mobile (touch) input polish
 
@@ -132,9 +136,12 @@ Issues and pull requests are welcome! This is a teaching project, so:
 
 ## Community & support
 
-- 📺 **Bilibili** — [老李游戏学院](https://space.bilibili.com/8618918)
-- 💬 **QQ Channel** — [【老李游戏学院】QQ频道](https://pd.qq.com/s/n93zqynt)
-- 💖 **Patreon** — [Li Game Academy](https://www.patreon.com/cw/LiGameAcademy)
+- 📺 **Bilibili** — [Li Game Academy](https://space.bilibili.com/8618918)
+- 💬 **English Discord** — [Join the English-speaking community](https://discord.gg/M7ZfMPBbH)
+- 🎮 **Games & demos** — [Li Game Academy on itch.io](https://godot-li.itch.io/)
+- 💻 **Open-source projects** — [Li Game Academy on GitHub](https://github.com/LiGameAcademy)
+- 💬 **QQ Channel** — [Li Game Academy](https://pd.qq.com/s/n93zqynt)
+- 💖 **English learning community** — [Li Game Academy on Patreon](https://www.patreon.com/cw/LiGameAcademy)
 
 ## Support the project
 

@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://cnxcpnydtse7k"]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Texture2D" uid="uid://dp54dcgrb5wv6" path="res://assets/textures/entities/planes/planeYellow1.png" id="1_3crff"]
-[ext_resource type="Script" uid="uid://bopmnug6qsix8" path="res://src/entities/plane.gd" id="1_wle06"]
-[ext_resource type="Texture2D" uid="uid://d0bcqgl73e1vy" path="res://assets/textures/entities/planes/planeYellow2.png" id="2_p47as"]
-[ext_resource type="Texture2D" uid="uid://dduq6trey1eiu" path="res://assets/textures/entities/planes/planeYellow3.png" id="3_d8n2r"]
-[ext_resource type="AudioStream" uid="uid://b0fe7ukpremmf" path="res://assets/audio/sound/coin1.ogg" id="5_17trs"]
+[ext_resource type="Texture2D" path="res://assets/textures/entities/planes/planeYellow1.png" id="1_3crff"]
+[ext_resource type="Script" path="res://src/entities/plane.gd" id="1_wle06"]
+[ext_resource type="Texture2D" path="res://assets/textures/entities/planes/planeYellow2.png" id="2_p47as"]
+[ext_resource type="Texture2D" path="res://assets/textures/entities/planes/planeYellow3.png" id="3_d8n2r"]
+[ext_resource type="AudioStream" path="res://assets/audio/sound/coin1.ogg" id="5_17trs"]
+
+[ext_resource type="Resource" path="res://src/config/default_game_config.tres" id="config"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ks0mr"]
 animations = [{
@@ -30,8 +32,7 @@ radius = 45.0111
 scale = Vector2(0.5, 0.5)
 collision_mask = 2
 script = ExtResource("1_wle06")
-max_tilt_angle = 90
-flap_power = 300
+config = ExtResource("config")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

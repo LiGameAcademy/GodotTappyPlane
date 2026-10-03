@@ -1,6 +1,5 @@
-# Godot 4+ specific ignores
 .godot/
-*.tmp
+exports/
 .vscode/
+*.tmp
 /*.rar
-export/

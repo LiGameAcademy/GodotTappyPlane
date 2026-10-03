@@ -1,29 +1,39 @@
 extends MarginContainer
 class_name PopupGameOver
 
-## 游戏结束界面的实现，显示最终分数并提供重试和退出选项
-
-# UI元素
 @onready var score_label: Label = %ScoreLabel
+@onready var _lbl_quit: Label = %LblQuit
+@onready var _lbl_retry: Label = %LblRetry
 
-# 按钮信号
 signal quit_pressed
 signal retry_pressed
 
-## 更新分数显示
-## @param score 最终分数
-func update_score(score: int) -> void:
-	# 更新分数标签文本
-	score_label.text = "本次分数：" + str(score)
+var _last_score: int = 0
 
-## 退出游戏按钮点击事件
+
+func _ready() -> void:
+	LocaleService.locale_changed.connect(_on_locale_changed)
+	_apply_static_texts()
+
+
+func update_score(score: int) -> void:
+	_last_score = score
+	score_label.text = tr("UI_SCORE") % score
+
+
 func _on_btn_quit_pressed() -> void:
-	print("点击了退出按钮")
-	# 发出退出信号
 	quit_pressed.emit()
 
-## 重试游戏按钮点击事件
+
 func _on_btn_retry_pressed() -> void:
-	print("点击了重试按钮")
-	# 发出重试信号
 	retry_pressed.emit()
+
+
+func _on_locale_changed(_locale: String) -> void:
+	_apply_static_texts()
+	score_label.text = tr("UI_SCORE") % _last_score
+
+
+func _apply_static_texts() -> void:
+	_lbl_quit.text = tr("UI_QUIT")
+	_lbl_retry.text = tr("UI_RETRY")

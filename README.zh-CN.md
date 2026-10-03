@@ -29,10 +29,12 @@
 
 这是 **老李游戏学院** Godot 系列教程 demo 的第 1 个，适合第一次接触 Godot 或游戏开发的同学。
 
-- 🎮 在线试玩：[itch.io](https://liweimin0512.itch.io/tappyplane)
+- 🎮 已发布 Web demo：[itch.io](https://godot-li.itch.io/tappyplane)（尚未核验线上构建与当前源码版本一致）
 - 📺 视频教程：[哔哩哔哩](https://space.bilibili.com/8618918)
 - 📚 图文教程：课程总库 [`projects/godot-tappy-plane/tutorial/`](https://github.com/LiGameAcademy/laoli_gamedev_godot4_course/tree/main/projects/godot-tappy-plane/tutorial)
 - 📄 English README：[README.md](./README.md)
+
+当前工程展示小游戏的核心流程；升级版及其 Windows/Web 成品仍在规划中。已有导出预设不代表成品已经通过独立运行验收。
 
 ## 你将学到
 
@@ -59,7 +61,7 @@ cd GodotTappyPlane
 # 在 Godot 中打开 project.godot，按 F5 运行
 ```
 
-> 首次打开需要等待素材导入。
+> 首次打开需要等待素材导入。界面默认 **英文**；标题画面可点 **EN / 中文** 切换，选择会写入 `user://locale.cfg`。
 
 ## 技术栈
 
@@ -92,9 +94,9 @@ GodotTappyPlane/
 
 | 顺序 | 内容 | 链接 |
 | --- | --- | --- |
-| 上篇 | 新建项目并导入素材 | [01-新建项目并导入素材.md](https://github.com/LiGameAcademy/laoli_gamedev_godot4_course/blob/main/projects/godot-tappy-plane/tutorial/01-%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%B9%B6%E5%AF%BC%E5%85%A5%E7%B4%A0%E6%9D%90.md) |
-| 中篇 | 让飞机飞起来 | [02-让飞机飞起来.md](https://github.com/LiGameAcademy/laoli_gamedev_godot4_course/blob/main/projects/godot-tappy-plane/tutorial/02-%E8%AE%A9%E9%A3%9E%E6%9C%BA%E9%A3%9E%E8%B5%B7%E6%9D%A5.md) |
-| 下篇 | 完成一款小游戏 | [03-完成一款小游戏.md](https://github.com/LiGameAcademy/laoli_gamedev_godot4_course/blob/main/projects/godot-tappy-plane/tutorial/03-%E5%AE%8C%E6%88%90%E4%B8%80%E6%AC%BE%E5%B0%8F%E6%B8%B8%E6%88%8F.md) |
+| 上篇 | Create the project and import assets | [01-create-project-and-import-assets.md](https://github.com/LiGameAcademy/laoli_gamedev_godot4_course/blob/main/projects/godot-tappy-plane/tutorial/01-create-project-and-import-assets.md) |
+| 中篇 | Make the plane fly | [02-make-the-plane-fly.md](https://github.com/LiGameAcademy/laoli_gamedev_godot4_course/blob/main/projects/godot-tappy-plane/tutorial/02-make-the-plane-fly.md) |
+| 下篇 | Finish the game | [03-finish-the-game.md](https://github.com/LiGameAcademy/laoli_gamedev_godot4_course/blob/main/projects/godot-tappy-plane/tutorial/03-finish-the-game.md) |
 
 本地跟做时，教程在课程总库同级目录：`projects/godot-tappy-plane/tutorial/`。
 
@@ -112,10 +114,9 @@ Windows 编辑器的文件系统**不区分**路径大小写，但导出进 `.pc
 
 ## 路线图
 
-- [x] 三篇中文图文教程  
+- [x] 三篇英文图文教程  
 - [x] Windows 导出预设  
 - [x] 资源文件名小写统一（`rock.tscn` / `rock.gd`）  
-- [ ] 英文教程翻译  
 - [ ] Web 导出预设完善  
 - [ ] 移动端触控优化  
 
@@ -130,9 +131,12 @@ Windows 编辑器的文件系统**不区分**路径大小写，但导出进 `.pc
 ## 社区
 
 - 📺 **哔哩哔哩**：[老李游戏学院](https://space.bilibili.com/8618918)
+- 💬 **中文 Discord**：[加入中文交流服务器](https://discord.gg/pJsF2S7yd)
+- 🎮 **游戏与演示**：[老李游戏学院 itch.io](https://godot-li.itch.io/)
+- 💻 **开源项目**：[老李游戏学院 GitHub 组织](https://github.com/LiGameAcademy)
 - 💬 **QQ 频道**：[【老李游戏学院】QQ 频道](https://pd.qq.com/s/n93zqynt)
-- 🌐 **知识星球**：[老李游戏学院](https://t.zsxq.com/12B5zOA6n)
-- 🌍 **Patreon（英文）**：[patreon.com/cw/LiGameAcademy](https://www.patreon.com/cw/LiGameAcademy)
+- 🌐 **中文知识社区 · 知识星球**：[老李游戏学院](https://wx.zsxq.com/group/28885154818841)
+- 🌍 **英文知识社区 · Patreon**：[patreon.com/cw/LiGameAcademy](https://www.patreon.com/cw/LiGameAcademy)
 
 ## 支持本项目
 
