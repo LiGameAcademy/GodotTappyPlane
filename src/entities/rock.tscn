@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://bvgch7xdw023x"]
+[gd_scene format=3 uid="uid://2gdb53u1oisf"]
 
-[ext_resource type="Script" uid="uid://disn0ct45gupl" path="res://src/entities/Rock.gd" id="1_58kvy"]
+[ext_resource type="Script" uid="uid://disn0ct45gupl" path="res://src/entities/rock.gd" id="1_58kvy"]
 [ext_resource type="Texture2D" uid="uid://djkiupc05u0i" path="res://assets/textures/entities/rocks/rock.png" id="1_60o7s"]
 
 [node name="Rock" type="Area2D" unique_id=261021031 groups=["rock"]]

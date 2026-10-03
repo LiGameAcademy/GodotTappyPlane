@@ -18,6 +18,7 @@ layer = 64
 
 [node name="PopupGameOver" parent="UICanvasLayer" unique_id=950916885 instance=ExtResource("8_hve3p")]
 unique_name_in_owner = true
+visible = false
 offset_left = -168.0
 offset_top = -69.5
 offset_right = 168.0
@@ -25,6 +26,7 @@ offset_bottom = 69.5
 
 [node name="GameForm" parent="UICanvasLayer" unique_id=1917992814 instance=ExtResource("6_j5wjh")]
 unique_name_in_owner = true
+visible = false
 
 [node name="MenuForm" parent="UICanvasLayer" unique_id=1026803139 instance=ExtResource("7_vef74")]
 unique_name_in_owner = true
