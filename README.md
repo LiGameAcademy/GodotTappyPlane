@@ -134,7 +134,7 @@ Issues and pull requests are welcome! This is a teaching project, so:
 
 - 📺 **Bilibili** — [老李游戏学院](https://space.bilibili.com/8618918)
 - 💬 **QQ Channel** — [【老李游戏学院】QQ频道](https://pd.qq.com/s/n93zqynt)
-- 🌐 **Knowledge community (Chinese)** — [知识星球 · 老李游戏学院](https://t.zsxq.com/12B5zOA6n)
+- 💖 **Patreon** — [Li Game Academy](https://www.patreon.com/cw/LiGameAcademy)
 
 ## Support the project
 
